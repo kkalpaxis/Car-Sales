@@ -17,13 +17,13 @@ const initialState = {
     ]
 };
 
-function rootReducer(state = initialState, action) {
-    if (action.type === ADD_FEATURE) {
-        return Object.assign({}, state, {
-            articles: state.features.concat(action.payload)
-        });
-    } 
-    return state;
+export const rootReducer = (state = initialState, action) => {
+    switch(action.type) {
+        case ADD_FEATURE: 
+            return{...state, feature}
+        default:
+            return state
+    }
 };
 
 export default rootReducer;
