@@ -1,4 +1,5 @@
 import { ADD_FEATURE } from "../constants/action-types";
+import { REMOVE_FEATURE } from "../constants/action-types"
 
 export function addFeature(newFeature) {
     return { 
@@ -6,3 +7,11 @@ export function addFeature(newFeature) {
         payload: newFeature 
     }
 };
+
+export function removeFeature(feature) {
+    console.log(feature)
+    return {
+        type: REMOVE_FEATURE,
+        payload: feature
+    }
+}

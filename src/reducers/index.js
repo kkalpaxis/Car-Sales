@@ -1,4 +1,5 @@
 import { ADD_FEATURE } from "../constants/action-types";
+import { REMOVE_FEATURE } from "../constants/action-types";
 
 const initialState = {
     additionalPrice: 0,
@@ -20,7 +21,17 @@ const initialState = {
 export const rootReducer = (state = initialState, action) => {
     switch(action.type) {
         case ADD_FEATURE: 
-            return{...state, feature}
+            const newFeatures = [...state.car.features, action.payload]
+            const filteredStore = state.store.filter((feature) => feature != action.payload)
+            const priceAdded = state.additionalPrice + action.payload.price
+            return{...state, car: {...state.car, features: newFeatures}, 
+            store: filteredStore, additionalPrice: priceAdded}
+        case REMOVE_FEATURE:
+            const newStore = [...state.store, action.payload]
+            const filteredFeatures = state.car.features.filter((feature) => feature != action.payload)
+            const newPrice = state.additionalPrice - action.payload.price
+            return{...state, store: newStore, car: {...state.car, features: filteredFeatures},
+            additionalPrice: newPrice }
         default:
             return state
     }
